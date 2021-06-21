@@ -23,7 +23,7 @@ The code is developed under the following configurations.
 
 2. Preprocess videos. You can do it in your own way as long as the index files are similar.
 
-    a. Extract frames at 1fps and waveforms at 11025Hz from videos. We have following directory structure:
+    a. Extract frames at 1fps and waveforms at 11025Hz from videos. We have following directory structure (please first ignore the detection results):
     ```
     data
     ├── audio
@@ -47,6 +47,15 @@ The code is developed under the following configurations.
     │   |   |   ├── ...
     │   |   ├── ...
     │   ├── ...
+    |
+    └── detection_results
+    |   ├── acoustic_guitar
+    │   |   ├── M3dekVSwNjY.mp4.npy
+    │   |   ├── ...
+    │   ├── trumpet
+    │   |   ├── STKXyBGSGyE.mp4.npy
+    │   |   ├── ...
+    │   ├── ...
     ```
 
     b. We created the index files ```train.csv```/```val.csv```/```test_sep.csv```. And the first two files are with the following format:
@@ -55,6 +64,10 @@ The code is developed under the following configurations.
     /trumpet/STKXyBGSGyE.mp3, /trumpet/STKXyBGSGyE.mp4,493
     ```
     For each row, it stores the information: ```AUDIO_PATH,FRAMES_PATH,NUMBER_FRAMES```
+    
+    c. Detect objects in video frames. We used object detector trained by Ruohan used in his Cosep project (see [CoSep repo](https://github.com/rhgao/co-separation)). The detected objects for each video are stored in a .npy file. 
+    
+    
 
 3. Train the grounding-only model for warming up
 ```bash
@@ -96,5 +109,5 @@ If you use the code from the project, please cite:
 ```
 
 ### Acknowledgements
-We borrowed a lot of code from [SoP](https://github.com/hangzhaomit/Sound-of-Pixels). We thank the authors for sharing their codes. If you use our codes, please also cite their nice work.
+We borrowed a lot of code from [SoP](https://github.com/hangzhaomit/Sound-of-Pixels) and used detector from Ruohan' [CoSep](https://github.com/rhgao/co-separation). We thank the authors for sharing their codes. If you use our codes, please also cite their nice works.
 
