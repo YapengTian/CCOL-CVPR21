@@ -109,5 +109,5 @@ If you use the code from the project, please cite:
 ```
 
 ### Acknowledgement
-We borrowed a lot of code from [SoP](https://github.com/hangzhaomit/Sound-of-Pixels) and used detector from Ruohan' [CoSep](https://github.com/rhgao/co-separation). We thank the authors for sharing their codes. If you use our codes, please also cite their nice works.
+We borrowed a lot of code from [SoP](https://github.com/hangzhaomit/Sound-of-Pixels) and used detector from Ruohan' [CoSep](https://github.com/rhgao/co-separation). We thank the authors for sharing their code. If you use our codes, please also cite their nice works.
 
