@@ -5,6 +5,9 @@ Pytorch implementation for CVPR21 "Cyclic Co-Learning of Sounding Object Visual 
 
 ![image](doc/ccol_fig.png)
 
+Unlike most of previous works, we assume that there are potential silent objects in videos during training. 
+We perform sounding object-aware separation during training to alleviate the silent object issue.
+
 ## Environment
 The code is developed under the following configurations.
 - Hardware: 1-4 GPUs (change ```[--num_gpus NUM_GPUS]``` accordingly)
@@ -14,21 +17,21 @@ The code is developed under the following configurations.
 ## Training
 1. Prepare video dataset.
 
-    a. Download MUSIC dataset from: https://github.com/roudimit/MUSIC_dataset
+    a. Download MUSIC dataset from: https://github.com/roudimit/MUSIC_dataset/blob/master/MUSIC_solo_videos.json
     
     b. Download videos.
 
 2. Preprocess videos. You can do it in your own way as long as the index files are similar.
 
-    a. Extract frames at 8fps and waveforms at 11025Hz from videos. We have following directory structure:
+    a. Extract frames at 1fps and waveforms at 11025Hz from videos. We have following directory structure:
     ```
     data
     ├── audio
     |   ├── acoustic_guitar
-    │   |   ├── M3dekVSwNjY.mp3
+    │   |   ├── M3dekVSwNjY.wav
     │   |   ├── ...
     │   ├── trumpet
-    │   |   ├── STKXyBGSGyE.mp3
+    │   |   ├── STKXyBGSGyE.wav
     │   |   ├── ...
     │   ├── ...
     |
@@ -46,14 +49,10 @@ The code is developed under the following configurations.
     │   ├── ...
     ```
 
-    b. Make training/validation index files by running:
+    b. We created the index files ```train.csv```/```val.csv```/```test_sep.csv```. And the first two files are with the following format:
     ```
-    python scripts/create_index_files.py
-    ```
-    It will create index files ```train.csv```/```val.csv``` with the following format:
-    ```
-    ./data/audio/acoustic_guitar/M3dekVSwNjY.mp3,./data/frames/acoustic_guitar/M3dekVSwNjY.mp4,1580
-    ./data/audio/trumpet/STKXyBGSGyE.mp3,./data/frames/trumpet/STKXyBGSGyE.mp4,493
+    /acoustic_guitar/M3dekVSwNjY.mp3, /acoustic_guitar/M3dekVSwNjY.mp4,1580
+    /trumpet/STKXyBGSGyE.mp3, /trumpet/STKXyBGSGyE.mp4,493
     ```
     For each row, it stores the information: ```AUDIO_PATH,FRAMES_PATH,NUMBER_FRAMES```
 
