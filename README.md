@@ -10,15 +10,6 @@ The code is developed under the following configurations.
 - Hardware: 1-4 GPUs (change ```[--num_gpus NUM_GPUS]``` accordingly)
 - Software: Ubuntu 16.04.3 LTS, ***CUDA>=8.0, Python>=3.5, PyTorch>=1.2***
 
-## Evaluation
-1. Evaluate the trained separation model.
-```bash
-./scripts/eval_ccol.sh
-```
-2. Evaluate the sounding object-aware separation model on videos with silent objects.
-```bash
-./scripts/eval_ccol_silent.sh
-```
 
 ## Training
 1. Prepare video dataset.
@@ -83,6 +74,15 @@ The code is developed under the following configurations.
 
 4. During training, visualizations are saved in HTML format under ```ckpt/MODEL_ID/visualization/```.
 
+## Evaluation
+1. Evaluate the trained separation model.
+```bash
+./scripts/eval_ccol.sh
+```
+2. Evaluate the sounding object-aware separation model on videos with silent objects.
+```bash
+./scripts/eval_ccol_silent.sh
+```
 
 
 ## Reference
