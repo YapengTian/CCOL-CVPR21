@@ -87,7 +87,7 @@ The code is developed under the following configurations.
 4. During training, visualizations are saved in HTML format under ```ckpt/MODEL_ID/visualization/```.
 
 ## Evaluation
-1. Evaluate the trained separation model.
+1. Evaluate the trained joint grounding and separation model.
 ```bash
 ./scripts/eval_ccol.sh
 ```
