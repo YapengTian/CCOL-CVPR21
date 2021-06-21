@@ -5,8 +5,8 @@ Pytorch implementation for CVPR21 "Cyclic Co-Learning of Sounding Object Visual 
 
 ![image](doc/ccol_fig.png)
 
-Unlike most of previous works, we assume that there are potential silent objects in videos during training. 
-We perform sounding object-aware separation during training to alleviate the silent object issue.
+Unlike most of previous works, we assume that there are potential silent objects in videos during training. We perform sounding object-aware separation during training to alleviate the silent object issue. With a cyclic co-learning framework, our 
+ model can simultaneously address sounding object visual grounding and audio-visual separation tasks.
 
 ## Environment
 The code is developed under the following configurations.
