@@ -1,6 +1,5 @@
 # System libs
 import os
-os.environ["CUDA_VISIBLE_DEVICES"]="1"
 import random
 import time
 
@@ -164,63 +163,22 @@ class NetWrapper(torch.nn.Module):
             pred_masks[1] = masks[1]
             pred_masks[2] = torch.mul(tf_data(g_sep[2],B,s1,s2).round(), masks[2]) + torch.mul(tf_data(g_sep[3],B,s1,s2).round(), masks[3])
             pred_masks[3] = masks[3]
-        # pred_masks[0] = masks[0]#+masks[1]
-        # pred_masks[1] = masks[1]
-        # pred_masks[2] = masks[2]#+masks[3]
-        # pred_masks[3] = masks[3]
 
         # 5. loss
         loss_sep = 0.5*(self.crit(pred_masks[0], gt_masks[0], weight).reshape(1) + self.crit(pred_masks[2], gt_masks[2], weight).reshape(1))
 
-        df_mask = [None for n in range(N)]
-        for i in range(N):
-            df_mask[i] = torch.zeros(B, 1).cuda()
-
-        for j in range(B):
-            df_mask[0][j] = self.crit(masks[0][j:j + 1], gt_masks[0][j:j + 1], weight[j:j + 1])
-            df_mask[1][j] = self.crit(masks[1][j:j + 1], gt_masks[0][j:j + 1], weight[j:j + 1])
-            df_mask[2][j] = self.crit(masks[2][j:j + 1], gt_masks[2][j:j + 1], weight[j:j + 1])
-            df_mask[3][j] = self.crit(masks[3][j:j + 1], gt_masks[2][j:j + 1], weight[j:j + 1])
-
-        a1 = (1-df_mask[0].div(df_mask[1] + df_mask[0]))
-        a2 = (1-df_mask[2].div(df_mask[2] + df_mask[3]))
 
         p = torch.zeros(B).cuda()
-        sep_pos = [None for n in range(N)]
-        for i in range(N):
-            sep_pos[i] = torch.zeros(B, 1).cuda()
-
-        for i in range(N):
-            for j in range(B):
-                sep_pos[i][j] = self.cts(g_sep[i][j:j+1], p[j:j+1].long())
-
-        sep_neg = [None for n in range(N)]
-        for i in range(N):
-            sep_neg[i] = torch.zeros(B, 1).cuda()
-
-        n = torch.ones(B).cuda()
-        for i in range(N):
-            for j in range(B):
-                sep_neg[i][j] = self.cts(g_sep[i][j:j+1], n[j:j+1].long())
-
         cts_pos = torch.zeros(B).cuda()
         cts_pos1 = torch.zeros(B).cuda()
         for i in range(B):
             cts_pos[i] = self.cts(g_pos[i:i + 1], p[i:i + 1].long())
             cts_pos1[i] = self.cts(g_pos1[i:i + 1], p[i:i + 1].long())
 
-        loss_grd     = (cts_pos*a1.round() + cts_pos1*(1-a1).round()).mean() + self.cts(g_neg, n.long())#torch.min(cts_pos, cts_pos1).mean() + self.cts(g_neg, n.long())
 
-        loss_grd_pos = (sep_pos[0]*a1.round() +  sep_pos[1]*(1-a1).round()
-                        + sep_pos[2]*a2.round() + sep_pos[3]*(1-a2).round()).mean()
-        th = 0.1
-        loss_grd_neg = (sep_neg[0]*(1-a1).round()*((1+torch.sign(df_mask[0]-th))/2) +  sep_neg[1]*a1.round()*((1+torch.sign(df_mask[1]-th))/2)
-                        + sep_neg[2]*(1-a2).round()*((1+torch.sign(df_mask[2]-th))/2) + sep_neg[3]*a2.round()*((1+torch.sign(df_mask[3]-th))/2)).mean()
+        loss_grd  = torch.min(cts_pos, cts_pos1).mean() + self.cts(g_neg, n.long()) + torch.min(self.cts(g_sep[0], p.long()), self.cts(g_sep[1], p.long())) + torch.min(self.cts(g_sep[2], p.long()), self.cts(g_sep[3], p.long()))
 
-        loss_grd_sep = (loss_grd_neg + loss_grd_pos)*0.25#(torch.min(sep_pos[0], sep_pos[1]).mean() + torch.min(sep_pos[2], sep_pos[3]).mean())*0.5
-        loss = loss_sep + loss_grd_sep
-
-        err = loss + loss_grd*0.5
+        err = loss_sep + 0.25*loss_grd
 
         return err, loss_sep, g, \
                {'pred_masks': pred_masks, 'gt_masks': gt_masks,
