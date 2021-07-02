@@ -15,7 +15,7 @@ OPTS+="--arch_grounding base "
 OPTS+="--arch_frame resnet18dilated "
 OPTS+="--img_pool maxpool "
 OPTS+="--num_channels 32 "
-
+OPTS+="--split test "
 # loss
 OPTS+="--binary_mask 0 "
 OPTS+="--loss l1 "

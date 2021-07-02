@@ -57,6 +57,8 @@ class ArgParser(object):
                             help="weighted loss")
         parser.add_argument('--log_freq', default=1, type=int,
                             help="log frequency scale")
+        parser.add_argument('--split', default='val',
+                            help="val or test")
 
         # Data related arguments
         parser.add_argument('--num_gpus', default=1, type=int,

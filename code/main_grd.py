@@ -8,39 +8,15 @@ import torch
 import torch.nn.functional as F
 import torch.nn as nn
 import numpy as np
-import scipy.io.wavfile as wavfile
-from scipy.misc import imsave
-from mir_eval.separation import bss_eval_sources
 
 # Our libs
 from arguments import ArgParser
 from dataset import MUSICMixDataset
-from models import ModelBuilder, activate, ContrastiveLoss
-from utils import AverageMeter, \
-    recover_rgb, magnitude2heatmap,\
-    istft_reconstruction, warpgrid, \
-    combine_video_audio, save_video, makedirs
-from viz import plot_loss_metrics, HTMLVisualizer
+from models import ModelBuilder
+from utils import AverageMeter, warpgrid,  makedirs
+from viz import plot_grdloss
 import warnings
 warnings.filterwarnings("ignore", category=FutureWarning)
-
-class LBSign(torch.autograd.Function):
-
-    @staticmethod
-    def forward(ctx, input):
-        return torch.round(input)
-
-    @staticmethod
-    def backward(ctx, grad_output):
-        return grad_output
-
-class BinaryLoss(nn.Module):
-    def __init__(self):
-        super(BinaryLoss, self).__init__()
-
-    def forward(self, m):
-
-        return torch.mean(1.0/(1e-6 + torch.abs(m-0.5)))
 
 # Network wrapper, defines forward pass
 class NetWrapper(torch.nn.Module):
@@ -50,8 +26,6 @@ class NetWrapper(torch.nn.Module):
         self.maxpool = torch.nn.AdaptiveMaxPool1d(1)
         self.crit = crit
         self.cts = nn.CrossEntropyLoss()
-        self.bn = LBSign.apply
-        self.cts_bn = BinaryLoss()
 
     def forward(self, batch_data, args):
         mag_mix = batch_data['mag_mix']
@@ -71,13 +45,6 @@ class NetWrapper(torch.nn.Module):
             for n in range(N):
                 mags[n] = F.grid_sample(mags[n], grid_warp)
 
-        # 0.1 calculate loss weighting coefficient: magnitude of input mixture
-        if args.weighted_loss:
-            weight = torch.log1p(mag_mix)
-            weight = torch.clamp(weight, 1e-3, 10)
-        else:
-            weight = torch.ones_like(mag_mix)
-
         # 0.2 ground truth masks are computed after warpping!
         gt_masks = [None for n in range(N)]
         for n in range(N):
@@ -95,10 +62,8 @@ class NetWrapper(torch.nn.Module):
         # LOG magnitude
         log_mag_mix = torch.log1p(mag_mix).detach()
         log_mag0 = torch.log1p(mags[0]).detach()
-        log_mag1 = torch.log1p(mags[1]).detach()
         log_mag2 = torch.log1p(mags[2]).detach()
-        # log_mag3 = torch.log1p(mags[3]).detach()
-        # with torch.no_grad():
+
         # grounding
         feat_sound_ground = self.net_sound_ground(log_mag_mix)
 
@@ -184,7 +149,7 @@ def evaluate(netWrapper, loader, history, epoch, args):
     # Plot figure
     if epoch > 0:
         print('Plotting figures...')
-        plot_loss_metrics(args.ckpt, history)
+        plot_grdloss(args.ckpt, history)
 
 # train one epoch
 def train(netWrapper, loader, optimizer, history, epoch, args):
@@ -290,7 +255,7 @@ def main(args):
     dataset_train = MUSICMixDataset(
         args.list_train, args, split='train')
     dataset_val = MUSICMixDataset(
-        args.list_val, args, max_sample=args.num_val, split='val')
+        args.list_val, args, max_sample=args.num_val, split=args.split)
 
     loader_train = torch.utils.data.DataLoader(
         dataset_train,
@@ -315,7 +280,7 @@ def main(args):
     # Set up optimizer
     optimizer = create_optimizer(nets, args)
 
-    # History of peroformance
+    # History of performance
     history = {
         'train': {'epoch': [], 'err': []},
         'val': {'epoch': [], 'err': []}}

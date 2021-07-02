@@ -1,9 +1,9 @@
 #!/bin/bash
 
 OPTS=""
-OPTS+="--id MUSIC_GRD_Real_min "
-OPTS+="--list_train /home/cxu-serve/p1/ytian21/dat/AVSS_data/MUSIC_dataset/data/train.csv "
-OPTS+="--list_val /home/cxu-serve/p1/ytian21/dat/AVSS_data/MUSIC_dataset/data/val.csv "
+OPTS+="--id MUSIC_GRD "
+OPTS+="--list_train ../data/Music/train.csv "
+OPTS+="--list_val ../data/Music/val.csv "
 
 # Models
 OPTS+="--arch_sound_ground vggish "
@@ -40,8 +40,8 @@ OPTS+="--audLen 65535 " # 65535
 OPTS+="--audRate 11025 " #11025
 
 # learning params
-OPTS+="--num_gpus 3 "
-OPTS+="--workers 32 "
+OPTS+="--num_gpus 4 "
+OPTS+="--workers 40 "
 OPTS+="--batch_size_per_gpu 12 "
 OPTS+="--lr_sound_ground 1e-4 "
 OPTS+="--lr_frame_ground 1e-4 "
@@ -54,4 +54,4 @@ OPTS+="--disp_iter 20 "
 OPTS+="--num_vis 40 "
 OPTS+="--num_val 256 "
 
-python -u main.py $OPTS
+python -u main_grd.py $OPTS

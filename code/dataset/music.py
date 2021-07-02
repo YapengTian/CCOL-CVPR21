@@ -39,6 +39,21 @@ class MUSICMixDataset(BaseDataset):
                     sample = self.list_sample[indexN]
                 infos[n] = sample
                 class_list.append(sample[0].split('/')[1])
+        elif self.split == 'val':
+            infos[0] = self.list_sample[index]
+            cls = infos[0][0].split('/')[1]
+            class_list.append(cls)
+            if not self.split == 'train':
+                random.seed(index)
+
+            for n in range(1, N):
+                indexN = random.randint(0, len(self.list_sample) - 1)
+                sample = self.list_sample[indexN]
+                while sample[0].split('/')[1] in class_list:
+                    indexN = random.randint(0, len(self.list_sample) - 1)
+                    sample = self.list_sample[indexN]
+                infos[n] = sample
+                class_list.append(sample[0].split('/')[1])
         else:
             csv_lis_path = "/home/cxu-serve/p1/ytian21/project/av-grounding/dataset/Music/test.csv"
             csv_lis = []
@@ -57,28 +72,10 @@ class MUSICMixDataset(BaseDataset):
                         infos[n] = data
                         break
 
-            #print(samples, infos)
-        # # the first video
-        # infos[0] = self.list_sample[index]
-        # cls = infos[0][0].split('/')[1]
-        # class_list.append(cls)
-        # if not self.split == 'train':
-        #     random.seed(index)
-        #
-        # for n in range(1, N):
-        #     indexN = random.randint(0, len(self.list_sample) - 1)
-        #     sample = self.list_sample[indexN]
-        #     while sample[0].split('/')[1] in class_list:
-        #         indexN = random.randint(0, len(self.list_sample) - 1)
-        #         sample = self.list_sample[indexN]
-        #     infos[n] = sample
-        #     class_list.append(sample[0].split('/')[1])
-
 
         # select frames
         idx_margin = max(
             int(self.fps * 1), (self.num_frames // 2) * self.stride_frames)
-        #print(infos[0], infos[1])
 
         for n, infoN in enumerate(infos):
             #print(infoN)

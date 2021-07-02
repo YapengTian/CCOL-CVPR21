@@ -16,6 +16,7 @@ OPTS+="--arch_grounding base "
 OPTS+="--arch_frame resnet18dilated "
 OPTS+="--img_pool maxpool "
 OPTS+="--num_channels 32 "
+OPTS+="--split test "
 
 # binary mask, BCE loss, weighted loss
 OPTS+="--binary_mask 0 "
