@@ -15,7 +15,7 @@ from mir_eval.separation import bss_eval_sources
 # Our libs
 from arguments import ArgParser
 from dataset import MUSICMixDataset
-from models import ModelBuilder, activate, ContrastiveLoss
+from models import ModelBuilder, activate
 from utils import AverageMeter, \
     recover_rgb, magnitude2heatmap, \
     istft_reconstruction, warpgrid, \
@@ -67,7 +67,6 @@ class NetWrapper(torch.nn.Module):
         B = mag_mix.size(0)
         T = mag_mix.size(3)
 
-        print(B)
         # 0.0 warp the spectrogram
         if args.log_freq:
             grid_warp = torch.from_numpy(
@@ -169,6 +168,7 @@ class NetWrapper(torch.nn.Module):
 
 
         p = torch.zeros(B).cuda()
+        n = torch.ones(B).cuda()
         cts_pos = torch.zeros(B).cuda()
         cts_pos1 = torch.zeros(B).cuda()
         for i in range(B):

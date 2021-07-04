@@ -1,6 +1,5 @@
 # System libs
 import os
-os.environ["CUDA_VISIBLE_DEVICES"]="1"
 import random
 import time
 

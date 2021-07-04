@@ -2,10 +2,9 @@
 
 OPTS=""
 OPTS+="--mode eval "
-OPTS+="--id MUSIC_GRD_Real_min-4mix-LogFreq-resnet18dilated-unet7-linear-frames3stride1-maxpool-ratio-weightedLoss-channels32-epoch40-step20_30 "
-OPTS+="--list_train /home/cxu-serve/p1/ytian21/dat/AVSS_data/MUSIC_dataset/data/train.csv "
-#OPTS+="--list_val /home/cxu-serve/p1/ytian21/dat/AVSS_data/MUSIC_dataset/data/val.csv "
-OPTS+="--list_val /home/cxu-serve/p1/ytian21/project/av-grounding/dataset/Music/test_sep.csv "
+OPTS+="--id MUSIC_GRD-4mix-LogFreq-resnet18dilated-unet7-linear-frames3stride1-maxpool-ratio-weightedLoss-channels32-epoch40-step20_30 "
+OPTS+="--list_train ../data/Music/train.csv "
+OPTS+="--list_val ../data/Music/test_sep.csv "
 
 # Models
 OPTS+="--arch_sound_ground vggish "
@@ -35,4 +34,4 @@ OPTS+="--frameRate 1 "
 OPTS+="--audLen 65535 "
 OPTS+="--audRate 11025 "
 
-python -u main.py $OPTS
+python -u main_grd.py $OPTS

@@ -89,8 +89,7 @@ class ArgParser(object):
         # Misc arguments
         parser.add_argument('--seed', default=1234, type=int,
                             help='manual seed')
-        parser.add_argument('--ckpt', default='/home/cxu-serve/p1/'
-                                              'ytian21/dat/AVSS_data/MUSIC_dataset/data/ckpt',
+        parser.add_argument('--ckpt', default='../data/ckpt',
                             help='folder to output checkpoints')
         parser.add_argument('--disp_iter', type=int, default=20,
                             help='frequency to display')
