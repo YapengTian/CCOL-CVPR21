@@ -614,7 +614,7 @@ def main(args):
     dataset_train = MUSICMixDataset(
         args.list_train, args, split='train')
     dataset_val = MUSICMixDataset(
-        args.list_val, args, max_sample=args.num_val, split='val')
+        args.list_val, args, max_sample=args.num_val, split=args.split)
 
     loader_train = torch.utils.data.DataLoader(
         dataset_train,

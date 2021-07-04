@@ -67,7 +67,6 @@ class NetWrapper(torch.nn.Module):
         B = mag_mix.size(0)
         T = mag_mix.size(3)
 
-        print(B)
         # 0.0 warp the spectrogram
         if args.log_freq:
             grid_warp = torch.from_numpy(
@@ -655,7 +654,7 @@ def main(args):
     dataset_train = MUSICMixDataset(
         args.list_train, args, split='train')
     dataset_val = MUSICMixDataset(
-        args.list_val, args, max_sample=args.num_val, split='val')
+        args.list_val, args, max_sample=args.num_val, split=args.split)
 
     loader_train = torch.utils.data.DataLoader(
         dataset_train,

@@ -2,7 +2,7 @@
 
 OPTS=""
 OPTS+="--mode eval "
-OPTS+="--id MUSIC_CCoL-4mix-LogFreq-resnet18dilated-unet7-linear-frames3stride1-maxpool-ratio-weightedLoss-channels32-epoch60-step30_50 "
+OPTS+="--id MUSIC_COL-4mix-LogFreq-resnet18dilated-unet7-linear-frames3stride1-maxpool-ratio-weightedLoss-channels32-epoch60-step30_50 "
 OPTS+="--list_train ../data/Music/train.csv "
 OPTS+="--list_val ../data/Music/test_sep.csv "
 
@@ -35,4 +35,4 @@ OPTS+="--frameRate 1 "
 OPTS+="--audLen 65535 "
 OPTS+="--audRate 11025 "
 
-python -u main_ccol.py $OPTS
+python -u main_col.py $OPTS
