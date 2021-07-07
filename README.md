@@ -83,7 +83,7 @@ The code is developed under the following configurations.
 ./scripts/train_ccol.sh
 ```
 
-4. During training, visualizations are saved in HTML format under ```ckpt/MODEL_ID/visualization/```.
+4. During training, visualizations are saved in HTML format under ```data/ckpt/MODEL_ID/visualization/```.
 
 ## Evaluation
 1. Evaluate the trained joint grounding and separation model. Our pre-trained model can be downloaded from [here](https://drive.google.com/file/d/16YcS2VptkXpwvM6FJFtXU4itt5J4-gFn/view?usp=sharing). Please put it into data/ckpt.
