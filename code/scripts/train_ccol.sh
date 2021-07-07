@@ -1,7 +1,7 @@
 #!/bin/bash
 
 OPTS=""
-OPTS+="--id MUSIC_CCoL_FT "
+OPTS+="--id MUSIC_CCoL "
 OPTS+="--list_train ../data/Music/train.csv "
 OPTS+="--list_val ../data/Music/val.csv "
 
@@ -16,12 +16,12 @@ OPTS+="--img_pool maxpool "
 OPTS+="--num_channels 32 "
 
 ## weights
-OPTS+="--weights_sound_ground  ../data/ckpt/MUSIC_CCoL-4mix-LogFreq-resnet18dilated-unet7-linear-frames3stride1-maxpool-ratio-weightedLoss-channels32-epoch60-step30_50/sound_ground_latest.pth "
-OPTS+="--weights_frame_ground  ../data/ckpt/MUSIC_CCoL-4mix-LogFreq-resnet18dilated-unet7-linear-frames3stride1-maxpool-ratio-weightedLoss-channels32-epoch60-step30_50/frame_ground_latest.pth "
-OPTS+="--weights_grounding ../data/ckpt/MUSIC_CCoL-4mix-LogFreq-resnet18dilated-unet7-linear-frames3stride1-maxpool-ratio-weightedLoss-channels32-epoch60-step30_50/grounding_latest.pth "
-OPTS+="--weights_sound  ../data/ckpt/MUSIC_CCoL-4mix-LogFreq-resnet18dilated-unet7-linear-frames3stride1-maxpool-ratio-weightedLoss-channels32-epoch60-step30_50/sound_latest.pth "
-OPTS+="--weights_frame ../data/ckpt/MUSIC_CCoL-4mix-LogFreq-resnet18dilated-unet7-linear-frames3stride1-maxpool-ratio-weightedLoss-channels32-epoch60-step30_50/frame_latest.pth "
-OPTS+="--weights_synthesizer ../data/ckpt/MUSIC_CCoL-4mix-LogFreq-resnet18dilated-unet7-linear-frames3stride1-maxpool-ratio-weightedLoss-channels32-epoch60-step30_50/synthesizer_latest.pth "
+OPTS+="--weights_sound_ground  ../data/ckpt/MUSIC_COL-4mix-LogFreq-resnet18dilated-unet7-linear-frames3stride1-maxpool-ratio-weightedLoss-channels32-epoch60-step30_50/sound_ground_latest.pth "
+OPTS+="--weights_frame_ground  ../data/ckpt/MUSIC_COL-4mix-LogFreq-resnet18dilated-unet7-linear-frames3stride1-maxpool-ratio-weightedLoss-channels32-epoch60-step30_50/frame_ground_latest.pth "
+OPTS+="--weights_grounding ../data/ckpt/MUSIC_COL-4mix-LogFreq-resnet18dilated-unet7-linear-frames3stride1-maxpool-ratio-weightedLoss-channels32-epoch60-step30_50/grounding_latest.pth "
+OPTS+="--weights_sound  ../data/ckpt/MUSIC_COL-4mix-LogFreq-resnet18dilated-unet7-linear-frames3stride1-maxpool-ratio-weightedLoss-channels32-epoch60-step30_50/sound_latest.pth "
+OPTS+="--weights_frame ../data/ckpt/MUSIC_COL-4mix-LogFreq-resnet18dilated-unet7-linear-frames3stride1-maxpool-ratio-weightedLoss-channels32-epoch60-step30_50/frame_latest.pth "
+OPTS+="--weights_synthesizer ../data/ckpt/MUSIC_COL-4mix-LogFreq-resnet18dilated-unet7-linear-frames3stride1-maxpool-ratio-weightedLoss-channels32-epoch60-step30_50/synthesizer_latest.pth "
 
 # binary mask, BCE loss, weighted loss
 OPTS+="--binary_mask 0 "
@@ -44,9 +44,9 @@ OPTS+="--audRate 11025 " #11025
 OPTS+="--num_gpus 4 "
 OPTS+="--workers 40 "
 OPTS+="--batch_size_per_gpu 12 "
-OPTS+="--lr_frame 1e-5 " #1e-4
-OPTS+="--lr_sound 1e-5 " #1e-4
-OPTS+="--lr_sound_ground 1e-5 "
+OPTS+="--lr_frame 1e-4 " #1e-4
+OPTS+="--lr_sound 1e-4 " #1e-4
+OPTS+="--lr_sound_ground 1e-4 "
 OPTS+="--lr_synthesizer 1e-4 " #1e-4
 OPTS+="--lr_grounding 1e-4 "
 OPTS+="--num_epoch 60 "

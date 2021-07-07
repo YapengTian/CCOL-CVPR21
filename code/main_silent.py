@@ -1,6 +1,5 @@
 # System libs
 import os
-os.environ["CUDA_VISIBLE_DEVICES"]="1"
 import random
 import time
 
@@ -16,7 +15,7 @@ from mir_eval.separation import bss_eval_sources
 # Our libs
 from arguments import ArgParser
 from dataset import MUSICMixDataset
-from models import ModelBuilder, activate, ContrastiveLoss
+from models import ModelBuilder, activate
 from utils import AverageMeter, \
     recover_rgb, magnitude2heatmap,\
     istft_reconstruction, warpgrid, \
@@ -666,7 +665,7 @@ def main(args):
     dataset_train = MUSICMixDataset(
         args.list_train, args, split='train')
     dataset_val = MUSICMixDataset(
-        args.list_val, args, max_sample=args.num_val, split='val')
+        args.list_val, args, max_sample=args.num_val, split=args.split)
 
     loader_train = torch.utils.data.DataLoader(
         dataset_train,
