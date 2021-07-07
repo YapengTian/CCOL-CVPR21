@@ -757,12 +757,12 @@ if __name__ == '__main__':
     if args.mode == 'train':
         makedirs(args.ckpt, remove=True)
     elif args.mode == 'eval':
-        args.weights_frame_ground = os.path.join(args.ckpt, 'frame_ground_latest.pth')
-        args.weights_sound_ground = os.path.join(args.ckpt, 'sound_ground_latest.pth')
-        args.weights_sound = os.path.join(args.ckpt, 'sound_latest.pth')
-        args.weights_frame = os.path.join(args.ckpt, 'frame_latest.pth')
-        args.weights_synthesizer = os.path.join(args.ckpt, 'synthesizer_latest.pth')
-        args.weights_grounding = os.path.join(args.ckpt, 'grounding_latest.pth')
+        args.weights_frame_ground = os.path.join(args.ckpt, 'frame_ground_best.pth')
+        args.weights_sound_ground = os.path.join(args.ckpt, 'sound_ground_best.pth')
+        args.weights_sound = os.path.join(args.ckpt, 'sound_best.pth')
+        args.weights_frame = os.path.join(args.ckpt, 'frame_best.pth')
+        args.weights_synthesizer = os.path.join(args.ckpt, 'synthesizer_best.pth')
+        args.weights_grounding = os.path.join(args.ckpt, 'grounding_best.pth')
 
     # initialize best error with a big number
     args.best_err = float("inf")
