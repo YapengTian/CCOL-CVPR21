@@ -1,7 +1,6 @@
 # CCoL
 Pytorch implementation for CVPR21 "Cyclic Co-Learning of Sounding Object Visual Grounding and Sound Separation".
 
-*This repository is under construction.
 
 ![image](doc/ccol_fig.png)
 
