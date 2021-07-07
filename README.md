@@ -79,7 +79,7 @@ The code is developed under the following configurations.
 ./scripts/train_col.sh
 ```
 
-3. Train the cyclic co-learning model
+3. Train the cyclic co-learning model. Note that the CCoL model performance can be first improved with finetuning (setting grounding lr as 1e-5 and separation lr as 1e-4).
 ```bash
 ./scripts/train_ccol.sh
 ```
