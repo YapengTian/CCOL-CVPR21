@@ -99,11 +99,12 @@ The code is developed under the following configurations.
 ## Reference
 If you use the code from the project, please cite:
 ```bibtex
-    @InProceedings{tian2021cyclic,
-        title={Cyclic Co-Learning of Sounding Object Visual Grounding and Sound Separation},
-        author={Tian, Yapeng and Hu, Di and Xu, Chenliang},
-        booktitle = {CVPR},
-        year = {2021}
+    @inproceedings{tian2021cyclic,
+     title={Cyclic Co-Learning of Sounding Object Visual Grounding and Sound Separation},
+     author={Tian, Yapeng and Hu, Di and Xu, Chenliang},
+     booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+     pages={2745--2754},
+     year={2021}
     }
 ```
 
