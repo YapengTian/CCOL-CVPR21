@@ -14,7 +14,7 @@ The code is developed under the following configurations.
 
 
 ## Training
-The frames and detection results used in the paper can be downloaded from this [link](https://drive.google.com/drive/folders/15dKDqXAfLlv55iGwipRCSnJXjumy4tLi?usp=sharing). If you want to want to use a new dataset, please follow the following steps.
+The frames and detection results used in the paper can be downloaded from this [link](https://drive.google.com/drive/folders/15dKDqXAfLlv55iGwipRCSnJXjumy4tLi?usp=sharing). If you want to use a new dataset, please follow the following steps.
 
 1. Prepare video dataset.
 
