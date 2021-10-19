@@ -14,6 +14,8 @@ The code is developed under the following configurations.
 
 
 ## Training
+The frames and detection results used in the paper can be downloaded from this [link](https://drive.google.com/drive/folders/15dKDqXAfLlv55iGwipRCSnJXjumy4tLi?usp=sharing). If you want to want to use a new dataset, please follow the following steps.
+
 1. Prepare video dataset.
 
     a. Download MUSIC dataset from: https://github.com/roudimit/MUSIC_dataset/blob/master/MUSIC_solo_videos.json
@@ -66,7 +68,7 @@ The code is developed under the following configurations.
     
     c. Detect objects in video frames. We used object detector trained by Ruohan used in his Cosep project (see [CoSep repo](https://github.com/rhgao/co-separation)). The detected objects for each video are stored in a .npy file. 
     
-    The frames and detection results used in the paper can be downloaded from this [link](https://drive.google.com/drive/folders/15dKDqXAfLlv55iGwipRCSnJXjumy4tLi?usp=sharing).
+    
     
     
 
