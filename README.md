@@ -20,7 +20,7 @@ The code is developed under the following configurations.
     
     b. Download videos.
 
-2. Preprocess videos. You can do it in your own way as long as the index files are similar.
+2. Preprocess videos. You can do it in your own way as long as the index files are similar. 
 
     a. Extract frames at 1fps and waveforms at 11025Hz from videos. We have following directory structure (please first ignore the detection results):
     ```
@@ -65,6 +65,8 @@ The code is developed under the following configurations.
     For each row, it stores the information: ```AUDIO_PATH,FRAMES_PATH,NUMBER_FRAMES```
     
     c. Detect objects in video frames. We used object detector trained by Ruohan used in his Cosep project (see [CoSep repo](https://github.com/rhgao/co-separation)). The detected objects for each video are stored in a .npy file. 
+    
+    The frames and detection results used in the paper can be downloaded from this [link](https://drive.google.com/drive/folders/15dKDqXAfLlv55iGwipRCSnJXjumy4tLi?usp=sharing).
     
     
 
