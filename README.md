@@ -24,7 +24,7 @@ The frames and detection results used in the paper can be downloaded from this [
 
 2. Preprocess videos. You can do it in your own way as long as the index files are similar. 
 
-    a. Extract frames at 1fps and waveforms at 11025Hz from videos. We have following directory structure (please first ignore the detection results):
+    a. Extract frames at 1fps and waveforms at 11000Hz from videos. We have following directory structure (please first ignore the detection results):
     ```
     data
     ├── audio
